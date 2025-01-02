@@ -7,14 +7,15 @@ namespace _Game.Scripts.Infrastructure
 {
     public abstract class EntityController : MonoBehaviour
     {
-        private EntityModel _model;
+        public EntityModel Model { get; private set; }
         private EntityView _view;
         private NavMeshAgent _agent;
 
         public void Init(EntityModel model, EntityView view)
         {
-            _model = model;
+            Model = model;
             _view = view;
+            
             _agent = gameObject.AddComponent<NavMeshAgent>();
             _agent.updateRotation = false;
             _agent.updateUpAxis = false;
@@ -23,6 +24,12 @@ namespace _Game.Scripts.Infrastructure
         public void MoveToPosition(Vector2 position)
         {
             _agent.SetDestination(position);
+        }
+        
+        public bool CanReachPosition(Vector2 position)
+        {
+            var path = new NavMeshPath();
+            return _agent.CalculatePath(position, path) && path.status == NavMeshPathStatus.PathComplete;
         }
 
         public void AttackTarget(EntityController target)

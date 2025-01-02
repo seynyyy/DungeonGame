@@ -1,9 +1,11 @@
 using System;
+using Random = UnityEngine.Random;
 
 namespace _Game.Scripts.Infrastructure
 {
     public abstract class EntityModel
     {
+        public string Name { get; private set; }
         public int MaxHp { get; private set; }
         public int Hp { get; private set; } //health point
         public int BaseAtk { get; private set; } //attack
@@ -11,13 +13,15 @@ namespace _Game.Scripts.Infrastructure
         public float BaseCritRate { get; private set; } //critical hit rate
         public float BaseCritDmg { get; private set; } //critical hit damage multiplier
 
-        public Action<int> OnHpChanged;
+        public Action<int, int> OnHpChanged;
 
         public EntityView View { get; private set; }
 
-        protected EntityModel(EntityView view, int maxHp, int hp, int baseAtk, float baseMS, float baseCritRate, float baseCritDmg)
+        protected EntityModel(EntityView view, string name, int maxHp, int hp, int baseAtk, float baseMS,
+            float baseCritRate, float baseCritDmg)
         {
             View = view;
+            Name = name;
             MaxHp = maxHp;
             Hp = hp;
             BaseAtk = baseAtk;
@@ -29,13 +33,25 @@ namespace _Game.Scripts.Infrastructure
         public void TakeDamage(int damage)
         {
             Hp = Math.Max(0, Hp - damage);
-            OnHpChanged?.Invoke(Hp);
+            OnHpChanged?.Invoke(Hp, MaxHp);
         }
 
         public void TakeHeal(int heal)
         {
             Hp = Math.Max(MaxHp, Hp + heal);
-            OnHpChanged?.Invoke(Hp);
+            OnHpChanged?.Invoke(Hp, MaxHp);
+        }
+
+        public int CalculateDamage(EntityModel target)
+        {
+            int damage = BaseAtk;
+
+            if (Random.Range(0f, 1f) > BaseCritRate)
+            {
+                damage = (int)(damage * BaseCritDmg);
+            }
+
+            return damage;
         }
     }
 }

@@ -6,39 +6,33 @@ namespace _Game.Scripts.Character
 {
     public class AdventurerFactory : MonoBehaviour
     {
-        [SerializeField] private GameObject characterPrefab;
-        
-        [field: SerializeField] private List<AdventurerDataSo> charactersDataSo;
+        [SerializeField] private GameObject adventurerPrefab;
 
-        private void Awake()
+        public AdventurerController CreateAdventurer(AdventurerDataSo adventurerData)
         {
-            CreateCharacters();
-        }
+            string adventurerName = adventurerData.adventurerName;
+            Vector2 position = adventurerData.position;
+            Color color = adventurerData.color;
+            int maxHp = adventurerData.maxHp;
+            int hp = adventurerData.hp;
+            int baseAtk = adventurerData.baseAtk;
+            float baseMs = adventurerData.baseMS;
+            float baseCritRate = adventurerData.baseCritRate;
+            float baseCritDmg = adventurerData.baseCritDmg;
 
-        private void CreateCharacters()
-        {
-            foreach (var characterData in charactersDataSo)
-            {
-                string characterName = characterData.Name;
-                Vector2 position = characterData.Position;
-                Color color = characterData.Color;
-                int maxHp = characterData.MaxHp;
-                int hp = characterData.Hp;
-                int baseAtk = characterData.BaseAtk;
-                float baseMs = characterData.BaseMS;
-                float baseCritRate = characterData.BaseCritRate;
-                float baseCritDmg = characterData.BaseCritDmg;
+            GameObject characterGO = Instantiate(adventurerPrefab, position, Quaternion.identity);
+            characterGO.name = adventurerName;
 
-                GameObject characterGO = Instantiate(characterPrefab, position, Quaternion.identity);
-                characterGO.name = characterName;
+            AdventurerView view = characterGO.AddComponent<AdventurerView>();
+            view.Init(color);
 
-                AdventurerView view = characterGO.AddComponent<AdventurerView>();
-                view.Init(color);
-                
-                AdventurerModel model = new AdventurerModel(view, maxHp, hp, baseAtk, baseMs, baseCritRate, baseCritDmg);
-                
-                characterGO.AddComponent<AdventurerController>().Init(model, view);
-            }
+            AdventurerModel model = new AdventurerModel(view, adventurerName, maxHp, hp, baseAtk, baseMs, baseCritRate,
+                baseCritDmg);
+
+            AdventurerController adventurerController = characterGO.AddComponent<AdventurerController>();
+            adventurerController.Init(model, view);
+
+            return adventurerController;
         }
     }
 }

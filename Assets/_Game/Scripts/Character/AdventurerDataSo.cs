@@ -1,18 +1,20 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Game.Scripts.Character
 {
     [CreateAssetMenu(menuName = "Character", fileName = "Data")]
     public class AdventurerDataSo : ScriptableObject
     {
-        [field:SerializeField] public string Name { get; set; } 
-        [field:SerializeField] public Vector2 Position { get; set; } 
-        [field:SerializeField] public Color Color { get; set; }
-        [field:SerializeField] public int MaxHp { get; set; }
-        [field:SerializeField] public int Hp { get; set; }
-        [field: SerializeField] public int BaseAtk { get; set; } = 1;
-        [field: SerializeField] public float BaseMS { get; set; } = 1f;
-        [field: SerializeField, Range(0f, 1f)] public float BaseCritRate { get; set; } = 0.1f;
-        [field: SerializeField, Range(1f, 10f)] public float BaseCritDmg { get; set; } = 1f;
+        public string adventurerName;
+        public Vector2 position;
+        public Color color;
+        public int maxHp;
+        public int hp;
+        public int baseAtk = 1;
+        public float baseMS = 1f;
+        public float attackCooldown = 1f;
+        [Range(0f, 1f)] public float baseCritRate = 0.1f;
+        [Range(1f, 10f)] public float baseCritDmg = 1f;
     }
 }
