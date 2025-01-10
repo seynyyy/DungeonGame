@@ -16,7 +16,7 @@ namespace _Game.Scripts.Infrastructure
             Model = model;
             _view = view;
             
-            _agent = gameObject.AddComponent<NavMeshAgent>();
+            _agent = gameObject.GetComponent<NavMeshAgent>();
             _agent.updateRotation = false;
             _agent.updateUpAxis = false;
         }

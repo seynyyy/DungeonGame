@@ -1,4 +1,4 @@
-namespace _Game.Scripts.CommandsSystem
+namespace _Game.Scripts.CommandsSystem.Model
 {
     public enum CommandStatus
     {

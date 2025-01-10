@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Title>k__BackingField: Move
   <Description>k__BackingField: Move to position
-  <DisplayImage>k__BackingField: {fileID: 2480933857640559186, guid: 0f6bdd8a24146ab4c8cbe02e43464c7e, type: 3}
-  <Cooldown>k__BackingField: 3
+  <DisplayImage>k__BackingField: {fileID: 21300000, guid: b1472bd42e784fe4cbe8a05c4feac520, type: 3}
+  <Cooldown>k__BackingField: 5
   <CooldownTimer>k__BackingField: 0
   <CommandResourceCost>k__BackingField: 5
+  <TargetType>k__BackingField: 4

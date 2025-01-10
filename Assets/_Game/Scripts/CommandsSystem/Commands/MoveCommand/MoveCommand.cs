@@ -1,4 +1,5 @@
 using _Game.Scripts.Character;
+using _Game.Scripts.CommandsSystem.Model;
 using _Game.Scripts.Infrastructure;
 using UnityEngine;
 
@@ -11,7 +12,8 @@ namespace _Game.Scripts.CommandsSystem.Commands.MoveCommand
 
         public override bool CheckCondition(EntityController owner, EntityController target, Vector2 location)
         {
-            if (owner == null || target == null || location == default) return false;
+            if(Status == CommandStatus.Cooldown) return false;
+            if (!owner || location == Vector2.zero) return false;
             
             if (owner is AdventurerController && owner.CanReachPosition(location))
             {
@@ -22,7 +24,7 @@ namespace _Game.Scripts.CommandsSystem.Commands.MoveCommand
             return false;
         }
         
-        public override void StartCommand()
+        public override void ApplyCommand()
         {
             _ownerController.MoveToPosition(_targetPosition);
             ChangeCooldownTimer(CooldownTime);
@@ -31,13 +33,12 @@ namespace _Game.Scripts.CommandsSystem.Commands.MoveCommand
 
         public override void EventTick(float deltaTime)
         {
-            if (Status == CommandStatus.Cooldown)
+            if (Status != CommandStatus.Cooldown) return;
+            ChangeCooldownTimer(CooldownTimer - deltaTime);
+            if (CooldownTimer <= 0)
             {
-                ChangeCooldownTimer(CooldownTimer - deltaTime);
-                if (CooldownTimer <= 0)
-                {
-                    ChangeStatus(CommandStatus.Ready);
-                }
+                ChangeCooldownTimer(CooldownTime);
+                ChangeStatus(CommandStatus.Ready);
             }
         }
     }

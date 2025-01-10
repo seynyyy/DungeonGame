@@ -2,7 +2,7 @@ using System;
 using _Game.Scripts.Infrastructure;
 using UnityEngine;
 
-namespace _Game.Scripts.CommandsSystem
+namespace _Game.Scripts.CommandsSystem.Model
 {
     public class Command
     {
@@ -14,6 +14,7 @@ namespace _Game.Scripts.CommandsSystem
         public float CooldownTimer { get; private set; }
 
         public float CommandResourceCost { get; private set; }
+        public CommandTargetType TargetType { get; private set; }
 
         public CommandStatus Status { get; private set; }
         public Action<float, float> OnChangeCooldownTimer;
@@ -29,6 +30,8 @@ namespace _Game.Scripts.CommandsSystem
 
         public void SetCommandResourceCost(float commandResourceCost) => CommandResourceCost = commandResourceCost;
 
+        public void SetTargetType(CommandTargetType targetType) => TargetType = targetType;
+        
         public void ChangeStatus(CommandStatus status) => Status = status;
 
         public void ChangeCooldownTimer(float timer)

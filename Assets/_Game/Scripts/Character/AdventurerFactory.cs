@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using _Game.Scripts.CommandsSystem;
+using _Game.Scripts.CommandsSystem.Controller;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _Game.Scripts.Character
@@ -23,11 +26,14 @@ namespace _Game.Scripts.Character
             GameObject characterGO = Instantiate(adventurerPrefab, position, Quaternion.identity);
             characterGO.name = adventurerName;
 
+            CommandStorage commandStorage = characterGO.AddComponent<CommandStorage>();
+            commandStorage.Init(adventurerData.commands);
+            
             AdventurerView view = characterGO.AddComponent<AdventurerView>();
             view.Init(color);
 
             AdventurerModel model = new AdventurerModel(view, adventurerName, maxHp, hp, baseAtk, baseMs, baseCritRate,
-                baseCritDmg);
+                baseCritDmg, commandStorage);
 
             AdventurerController adventurerController = characterGO.AddComponent<AdventurerController>();
             adventurerController.Init(model, view);

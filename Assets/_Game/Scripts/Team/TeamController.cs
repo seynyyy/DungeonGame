@@ -1,25 +1,37 @@
 using System;
 using System.Collections.Generic;
 using _Game.Scripts.Character;
+using _Game.Scripts.CommandsSystem;
+using _Game.Scripts.CommandsSystem.Controller;
+using _Game.Scripts.CommandsSystem.Model;
 using UnityEngine;
 
 namespace _Game.Scripts.Team
 {
     public class TeamController : MonoBehaviour
     {
-        [field: SerializeField] private List<AdventurerDataSo> adventurersData;
-        [field: SerializeField] private AdventurerFactory adventurerFactory;
-        [field: SerializeField] private TeamView teamView;
-
-        private List<AdventurerController> _adventurers = new();
+        [SerializeField] private List<AdventurerDataSo> adventurersData;
+        [SerializeField] private AdventurerFactory adventurerFactory;
+        [SerializeField] private TeamView teamView;
+        
+        [HideInInspector] public AdventurerController selectedAdventurer; // TODO: Придумати показ команд для випадку null
+        public Action<AdventurerController> OnAdventurerSelected;
+        
+        private readonly List<AdventurerController> _adventurers = new();
         public Action OnAdventurerRegistered;
+        
+        private SelectionState _selectionState;
+        private Action<SelectionState> _onSelectionStateChanged;
 
-        public IEnumerable<AdventurerController> GetAdventurers()
+        public SelectionState SelectionState => _selectionState;
+        public void SetSelectionState(SelectionState state)
         {
-            return _adventurers;
+            _selectionState = state;
+            _onSelectionStateChanged?.Invoke(state);
         }
+        public IEnumerable<AdventurerController> GetAdventurers() => _adventurers;
 
-        public void RegisterAdventurer(AdventurerController adventurer)
+        private void RegisterAdventurer(AdventurerController adventurer)
         {
             _adventurers.Add(adventurer);
             OnAdventurerRegistered?.Invoke();
@@ -31,20 +43,36 @@ namespace _Game.Scripts.Team
             OnAdventurerRegistered?.Invoke();
         }
 
-        public void CommandAdventurers()
+        public void Init()
         {
-            throw new NotImplementedException();
+            teamView.Init(ref _onSelectionStateChanged);
+            CreateAdventurers();
         }
 
-        public void CreateAdventurers()
+        private void CreateAdventurers()
         {
             foreach (var data in adventurersData)
             {
                 var adventurerController = adventurerFactory.CreateAdventurer(data);
                 RegisterAdventurer(adventurerController);
                 
-                teamView.CreateAdventurerCard(adventurerController.Model as AdventurerModel);
+                teamView.CreateAdventurerCardView(adventurerController.Model as AdventurerModel, adventurerController);
             }
+        }
+        
+        public void SelectAdventurer(AdventurerController adventurerController)
+        {
+            if (selectedAdventurer == adventurerController)
+            {
+                selectedAdventurer = null;
+                SetSelectionState(SelectionState.None);
+            }
+            else
+            {
+                selectedAdventurer = adventurerController;
+                SetSelectionState(SelectionState.CommandSelection);
+            }
+            OnAdventurerSelected?.Invoke(selectedAdventurer);
         }
     }
 }

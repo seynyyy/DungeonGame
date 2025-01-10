@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
-namespace _Game.Scripts.CommandsSystem
+namespace _Game.Scripts.CommandsSystem.Model
 {
-    [CreateAssetMenu(fileName = "New Command")]
+    [Serializable, CreateAssetMenu(fileName = "New Command")]
     public class CommandConfig : ScriptableObject
     {
         [field: SerializeField] public string Title { get; private set; }
@@ -11,6 +12,10 @@ namespace _Game.Scripts.CommandsSystem
         [field: SerializeField] public float Cooldown { get; private set; }
         [field: SerializeField] public float CooldownTimer { get; private set; }
         [field: SerializeField] public float CommandResourceCost { get; private set; }
+        [field: SerializeField] public CommandTargetType TargetType { get; private set; }
+
+
+
         public virtual CommandFactory GetFactory() => new CommandFactory(this);
     }
 }

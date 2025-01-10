@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using _Game.Scripts.CommandsSystem;
+using _Game.Scripts.CommandsSystem.Model;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -16,5 +19,7 @@ namespace _Game.Scripts.Character
         public float attackCooldown = 1f;
         [Range(0f, 1f)] public float baseCritRate = 0.1f;
         [Range(1f, 10f)] public float baseCritDmg = 1f;
+        
+        [field: SerializeField] public List<CommandConfig> commands;
     }
 }

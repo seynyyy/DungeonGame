@@ -22,3 +22,5 @@ MonoBehaviour:
   attackCooldown: 10
   baseCritRate: 0.1
   baseCritDmg: 3.87
+  commands:
+  - {fileID: 11400000, guid: 9d4f69d70c4573443b7bfb0af938df2d, type: 2}

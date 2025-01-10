@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0321867d0774efebcf4e4fb2e725d55, type: 3}
   m_Name: Character2
   m_EditorClassIdentifier: 
-  adventurerName: Vova
-  position: {x: 0, y: 10}
-  color: {r: 1, g: 0, b: 0.6708684, a: 0}
+  adventurerName: Peremoga
+  position: {x: 0, y: 5}
+  color: {r: 1, g: 0, b: 0.6708684, a: 1}
   maxHp: 100
   hp: 50
   baseAtk: 1
@@ -22,3 +22,5 @@ MonoBehaviour:
   attackCooldown: 1
   baseCritRate: 0.1
   baseCritDmg: 1
+  commands:
+  - {fileID: 11400000, guid: 9d4f69d70c4573443b7bfb0af938df2d, type: 2}

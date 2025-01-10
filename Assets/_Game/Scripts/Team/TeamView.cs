@@ -1,23 +1,68 @@
+using System;
 using _Game.Scripts.Character;
+using _Game.Scripts.CommandsSystem;
+using _Game.Scripts.CommandsSystem.View;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _Game.Scripts.Team
 {
     public class TeamView : MonoBehaviour
     {
-        [SerializeField] private TeamController teamController;
-        [SerializeField] private Transform adventurersPanelContent;
-        [SerializeField] private GameObject adventurerCardPrefab;
+        [Header("Controllers")] [SerializeField]
+        private TeamController teamController;
 
-        public void CreateAdventurerCard(AdventurerModel adventurerModel)
+        [Header("Prefabs")] [SerializeField] private GameObject adventurerCardPrefab;
+        [SerializeField] private GameObject commandCardPrefab;
+
+        [Header("UI")] [SerializeField] private Transform adventurersPanelContent;
+        [SerializeField] private GameObject selectionPopup;
+        [SerializeField] private TMP_Text selectionPopupText;
+
+        public void Init(ref Action<SelectionState> onSelectionStateChanged)
         {
+            onSelectionStateChanged += OnSelectionStateChanged;
+        }
+        
+        private void OnSelectionStateChanged(SelectionState selectionState)
+        {
+            switch (selectionState)
+            {
+                case SelectionState.None:
+                    selectionPopup.SetActive(false);
+                    break;
+                case SelectionState.CommandSelection:
+                    selectionPopup.SetActive(true);
+                    selectionPopupText.text = "Select command";
+                    break;
+                case SelectionState.PositionSelection:
+                    selectionPopup.SetActive(true);
+                    selectionPopupText.text = "Select position";
+                    break;
+                case SelectionState.TargetSelection:
+                    selectionPopup.SetActive(true);
+                    selectionPopupText.text = "Select target";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+
+        public void CreateAdventurerCardView(AdventurerModel adventurerModel, AdventurerController adventurerController)
+        {
+            //TODO: Розібратись з відповідальністю між TeamView та AdventurerView
             var adventurerCard = Instantiate(adventurerCardPrefab, adventurersPanelContent);
             var adventurerCardView = adventurerCard.GetComponent<AdventurerCardView>();
+
             adventurerModel.OnHpChanged += adventurerCardView.UpdateHealthBar;
             adventurerCardView.UpdateHealthBar(adventurerModel.Hp, adventurerModel.MaxHp);
-            
+
             adventurerCardView.NameText.text = adventurerModel.Name;
-            adventurerCardView.PortraitImage.color = Color.cyan;
+            adventurerCardView.PortraitImage.color = Color.yellow;
+
+            adventurerCardView.Init(teamController, adventurerController);
         }
     }
 }

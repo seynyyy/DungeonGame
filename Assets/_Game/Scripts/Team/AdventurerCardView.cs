@@ -1,3 +1,5 @@
+using System;
+using _Game.Scripts.Character;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,23 +10,58 @@ namespace _Game.Scripts.Team
     {
         [SerializeField] private Slider healthBar;
         [SerializeField] private TMP_Text nameText;
-
-        public TMP_Text NameText
-        {
-            get => nameText;
-            set => nameText = value;
-        }
-
-        public Image PortraitImage
-        {
-            get => portraitImage;
-            set => portraitImage = value;
-        }
-
         [SerializeField] private Image portraitImage;
+
+        private bool _isSelected;
+
+        private TeamController _teamController;
+        private AdventurerController _adventurerController;
+
+        public void Init(TeamController teamController, AdventurerController adventurerController)
+        {
+            _teamController = teamController;
+            _adventurerController = adventurerController;
+            _teamController.OnAdventurerSelected += CardSelected;
+        }
+
+        //TODO: Переосмислити Dependency Injection в цьому класі
+
+        public TMP_Text NameText => nameText;
+
+        public Image PortraitImage => portraitImage;
+
         public void UpdateHealthBar(int hp, int maxHp)
         {
-            healthBar.value = hp/(float)maxHp;
+            healthBar.value = hp / (float)maxHp;
+        }
+
+        public void OnCardClicked()
+        {
+            _teamController.SelectAdventurer(_adventurerController);
+        }
+
+        private void CardSelected(AdventurerController adventurerController)
+        {
+            if (_adventurerController == adventurerController)
+            {
+                HighlightCard();
+            }
+            else
+            {
+                UnhighlightCard();
+            }
+        }
+
+        private void HighlightCard()
+        {
+            var color = Color.yellow;
+            GetComponent<Image>().color = color;
+        }
+
+        private void UnhighlightCard()
+        {
+            var color = Color.white;
+            GetComponent<Image>().color = color;
         }
     }
 }
