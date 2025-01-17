@@ -19,18 +19,19 @@ namespace _Game.Scripts.Team
         
         private readonly List<AdventurerController> _adventurers = new();
         public Action OnAdventurerRegistered;
-        
-        private SelectionState _selectionState;
+
         private Action<SelectionState> _onSelectionStateChanged;
 
-        public SelectionState SelectionState => _selectionState;
-        public void SetSelectionState(SelectionState state)
-        {
-            _selectionState = state;
-            _onSelectionStateChanged?.Invoke(state);
-        }
+        public SelectionState SelectionState { get; private set; }
+        
         public IEnumerable<AdventurerController> GetAdventurers() => _adventurers;
 
+        public void SetSelectionState(SelectionState state)
+        {
+            SelectionState = state;
+            _onSelectionStateChanged?.Invoke(state);
+        }
+        
         private void RegisterAdventurer(AdventurerController adventurer)
         {
             _adventurers.Add(adventurer);

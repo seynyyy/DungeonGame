@@ -44,6 +44,7 @@ namespace _Game.Scripts.Team
                     selectionPopup.SetActive(true);
                     selectionPopupText.text = "Select target";
                     break;
+                case SelectionState.AllySelection:
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -59,10 +60,7 @@ namespace _Game.Scripts.Team
             adventurerModel.OnHpChanged += adventurerCardView.UpdateHealthBar;
             adventurerCardView.UpdateHealthBar(adventurerModel.Hp, adventurerModel.MaxHp);
 
-            adventurerCardView.NameText.text = adventurerModel.Name;
-            adventurerCardView.PortraitImage.color = Color.yellow;
-
-            adventurerCardView.Init(teamController, adventurerController);
+            adventurerCardView.Init(teamController, adventurerController, adventurerModel.Name, null); //TODO: додати портрет
         }
     }
 }

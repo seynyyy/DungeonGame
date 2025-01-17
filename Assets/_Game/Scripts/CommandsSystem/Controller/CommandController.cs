@@ -48,7 +48,7 @@ namespace _Game.Scripts.CommandsSystem.Controller
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
+
             _currentCommand = command;
 
             switch (command.Status)
@@ -71,28 +71,21 @@ namespace _Game.Scripts.CommandsSystem.Controller
 
         public void SelectPosition(Vector2 position)
         {
-            if (_currentCommand.Status == CommandStatus.Cooldown) return;
+            if (_currentCommand == null) return;
             _targetPosition = position;
+            
+            if (!_currentCommand.CheckCondition(_ownerController, _targetController, _targetPosition)) return;
+            if (_currentCommand.Status == CommandStatus.Cooldown) return;
+            
+            _currentCommand.ApplyCommand();
+            _currentCommand = null;
             teamController.SetSelectionState(SelectionState.None);
         }
-        
+
         public void SelectTarget(EntityController target)
         {
             _targetController = target;
             teamController.SetSelectionState(SelectionState.None);
-        }
-
-        private void FixedUpdate()
-        {
-            if (_currentCommand == null) return;
-
-            if (teamController.SelectionState == SelectionState.None &&
-                _currentCommand.CheckCondition(_ownerController, _targetController, _targetPosition))
-            {
-                _currentCommand.ApplyCommand();
-                _currentCommand = null;
-            }
-            
         }
     }
 }

@@ -17,27 +17,22 @@ namespace _Game.Scripts.Team
         private TeamController _teamController;
         private AdventurerController _adventurerController;
 
-        public void Init(TeamController teamController, AdventurerController adventurerController)
+        public void Init(TeamController teamController, AdventurerController adventurerController, string adventurerName,
+            Sprite portrait)
         {
             _teamController = teamController;
             _adventurerController = adventurerController;
             _teamController.OnAdventurerSelected += CardSelected;
+            
+            nameText.text = adventurerName;
+            portraitImage.sprite = portrait;
+            
+            GetComponent<Button>().onClick.AddListener(() => _teamController.SelectAdventurer(_adventurerController));;
         }
-
-        //TODO: Переосмислити Dependency Injection в цьому класі
-
-        public TMP_Text NameText => nameText;
-
-        public Image PortraitImage => portraitImage;
-
+        
         public void UpdateHealthBar(int hp, int maxHp)
         {
             healthBar.value = hp / (float)maxHp;
-        }
-
-        public void OnCardClicked()
-        {
-            _teamController.SelectAdventurer(_adventurerController);
         }
 
         private void CardSelected(AdventurerController adventurerController)
