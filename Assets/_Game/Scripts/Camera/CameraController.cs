@@ -28,9 +28,9 @@ namespace _Game.Scripts.Camera
             _camera.transform.Translate(new Vector3(xAxisValue * Time.deltaTime * 5f, yAxisValue * Time.deltaTime * 5f,
                 0));
 
-            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) //TODO: Переробити визначення позиції
+            if (Input.GetMouseButtonDown(0) &&
+                !EventSystem.current.IsPointerOverGameObject()) //TODO: Переробити визначення позиції
                 _onSelectPosition.Invoke(_camera.ScreenToWorldPoint(Input.mousePosition));
-            
         }
     }
 }

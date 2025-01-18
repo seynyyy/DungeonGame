@@ -8504,9 +8504,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -8693,6 +8693,53 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260562817}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &309071504
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 309071506}
+  - component: {fileID: 309071505}
+  m_Layer: 0
+  m_Name: EnemyTeam Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &309071505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309071504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b54b2c0f0b414034ad6a54c5612a3216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adventurersData:
+  - {fileID: 11400000, guid: 0784b5fc538b5c44dbd4c97d44da870f, type: 2}
+  entityFactory: {fileID: 2095692035}
+--- !u!4 &309071506
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309071504}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -9101,7 +9148,7 @@ GameObject:
   - component: {fileID: 782505008}
   - component: {fileID: 782505009}
   m_Layer: 0
-  m_Name: Team Controller
+  m_Name: Ally Team Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9137,7 +9184,7 @@ MonoBehaviour:
   adventurersData:
   - {fileID: 11400000, guid: 0fef751ecbc702f4d9fedf3178e1a7d9, type: 2}
   - {fileID: 11400000, guid: 7c7b6a7074d4a6145b5c03facbbbd516, type: 2}
-  adventurerFactory: {fileID: 2095692035}
+  entityFactory: {fileID: 2095692035}
   teamView: {fileID: 782505009}
   selectedAdventurer: {fileID: 0}
 --- !u!114 &782505009
@@ -9505,7 +9552,7 @@ GameObject:
   - component: {fileID: 2095692036}
   - component: {fileID: 2095692035}
   m_Layer: 0
-  m_Name: Adventurer Factory
+  m_Name: Entity Factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16277,6 +16324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamController: {fileID: 782505008}
+  enemyTeamController: {fileID: 309071505}
   commandController: {fileID: 1764541220}
 --- !u!114 &2095692035
 MonoBehaviour:
@@ -16290,7 +16338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76bb7bd636bd4be5b464cd81235aeb19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adventurerPrefab: {fileID: 5506336682633385763, guid: f6794027e8fa36f44b813baf56506e57, type: 3}
+  entityPrefab: {fileID: 5506336682633385763, guid: f6794027e8fa36f44b813baf56506e57, type: 3}
 --- !u!4 &2095692036
 Transform:
   m_ObjectHideFlags: 0
@@ -16366,5 +16414,6 @@ SceneRoots:
   - {fileID: 1307683230}
   - {fileID: 2087660408}
   - {fileID: 782505007}
+  - {fileID: 309071506}
   - {fileID: 1764541219}
   - {fileID: 2095692036}

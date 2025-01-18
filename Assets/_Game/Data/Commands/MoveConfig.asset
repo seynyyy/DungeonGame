@@ -15,7 +15,7 @@ MonoBehaviour:
   <Title>k__BackingField: Move
   <Description>k__BackingField: Move to position
   <DisplayImage>k__BackingField: {fileID: 21300000, guid: b1472bd42e784fe4cbe8a05c4feac520, type: 3}
-  <Cooldown>k__BackingField: 5
+  <Cooldown>k__BackingField: 10
   <CooldownTimer>k__BackingField: 0
   <CommandResourceCost>k__BackingField: 5
   <TargetType>k__BackingField: 4

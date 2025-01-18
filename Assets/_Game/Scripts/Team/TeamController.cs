@@ -4,21 +4,23 @@ using _Game.Scripts.Character;
 using _Game.Scripts.CommandsSystem;
 using _Game.Scripts.CommandsSystem.Controller;
 using _Game.Scripts.CommandsSystem.Model;
+using _Game.Scripts.Infrastructure;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Game.Scripts.Team
 {
     public class TeamController : MonoBehaviour
     {
         [SerializeField] private List<AdventurerDataSo> adventurersData;
-        [SerializeField] private AdventurerFactory adventurerFactory;
+        [SerializeField] private EntityFactory entityFactory;
         [SerializeField] private TeamView teamView;
         
         [HideInInspector] public AdventurerController selectedAdventurer; // TODO: Придумати показ команд для випадку null
         public Action<AdventurerController> OnAdventurerSelected;
         
         private readonly List<AdventurerController> _adventurers = new();
-        public Action OnAdventurerRegistered;
+        public Action<AdventurerController> OnAdventurerRegistered;
 
         private Action<SelectionState> _onSelectionStateChanged;
 
@@ -35,13 +37,13 @@ namespace _Game.Scripts.Team
         private void RegisterAdventurer(AdventurerController adventurer)
         {
             _adventurers.Add(adventurer);
-            OnAdventurerRegistered?.Invoke();
+            OnAdventurerRegistered?.Invoke(adventurer);
         }
 
         public void UnregisterAdventurer(AdventurerController adventurer)
         {
             _adventurers.Remove(adventurer);
-            OnAdventurerRegistered?.Invoke();
+            OnAdventurerRegistered?.Invoke(adventurer);
         }
 
         public void Init()
@@ -54,7 +56,7 @@ namespace _Game.Scripts.Team
         {
             foreach (var data in adventurersData)
             {
-                var adventurerController = adventurerFactory.CreateAdventurer(data);
+                var adventurerController = entityFactory.CreateAdventurer(data);
                 RegisterAdventurer(adventurerController);
                 
                 teamView.CreateAdventurerCardView(adventurerController.Model as AdventurerModel, adventurerController);

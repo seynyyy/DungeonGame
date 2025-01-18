@@ -11,15 +11,12 @@ namespace _Game.Scripts.CommandsSystem.Controller
 {
     public class CommandController : MonoBehaviour
     {
-        private EntityController _ownerController;
-        private EntityController _targetController;
-        private Vector2 _targetPosition = Vector2.zero;
-
-        [Header("Controllers")] [SerializeField]
-        private TeamController teamController;
-
+        [SerializeField] private TeamController teamController;
         [SerializeField] private CommandsView commandsView;
 
+        private EntityController _ownerController;
+        private EntityController _targetController;
+        private Vector2 _targetPosition;
         private Command _currentCommand;
 
         public void Init()
@@ -84,7 +81,14 @@ namespace _Game.Scripts.CommandsSystem.Controller
 
         public void SelectTarget(EntityController target)
         {
+            if (_currentCommand == null) return;
             _targetController = target;
+            
+            if (!_currentCommand.CheckCondition(_ownerController, _targetController, _targetPosition)) return;
+            if (_currentCommand.Status == CommandStatus.Cooldown) return;
+            
+            _currentCommand.ApplyCommand();
+            _currentCommand = null;
             teamController.SetSelectionState(SelectionState.None);
         }
     }

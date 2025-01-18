@@ -53,7 +53,6 @@ namespace _Game.Scripts.Team
 
         public void CreateAdventurerCardView(AdventurerModel adventurerModel, AdventurerController adventurerController)
         {
-            //TODO: Розібратись з відповідальністю між TeamView та AdventurerView
             var adventurerCard = Instantiate(adventurerCardPrefab, adventurersPanelContent);
             var adventurerCardView = adventurerCard.GetComponent<AdventurerCardView>();
 
