@@ -1,6 +1,7 @@
 using System;
 using _Game.Scripts.CommandsSystem.Controller;
 using _Game.Scripts.Infrastructure;
+using _Game.Scripts.Infrastructure._Game.Scripts.Infrastructure;
 using UnityEngine;
 
 namespace _Game.Scripts.CommandsSystem.Model
@@ -18,7 +19,7 @@ namespace _Game.Scripts.CommandsSystem.Model
         public CommandTargetType TargetType { get; private set; }
 
         public CommandStatus Status { get; private set; }
-        public CommandTimer CommandTimer { get; private set; }
+        public ActionContainer<Action<float, float>> commandTimerContainer { get; private set; }
 
         public void SetDescription(string title, string description, Sprite displayImage)
         {
@@ -38,10 +39,10 @@ namespace _Game.Scripts.CommandsSystem.Model
         public void ChangeCooldownTimer(float timer)
         {
             CooldownTimer = Mathf.Clamp(timer, 0f, CooldownTime);
-            CommandTimer.OnChangeCooldownTimer?.Invoke(CooldownTimer, CooldownTime);
+            commandTimerContainer.Action?.Invoke(CooldownTimer, CooldownTime);
         }
         
-        public void InitCommandTimer() => CommandTimer = new CommandTimer();
+        public void InitCommandTimer() => commandTimerContainer = new ActionContainer<Action<float, float>>((_, _) => { });
 
         public virtual void StartCommand()
         {

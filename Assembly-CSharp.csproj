@@ -48,13 +48,16 @@
   <ItemGroup>
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Commands\MoveCommand\MoveConfig.cs" />
     <Compile Include="Assets\_Game\Scripts\Character\AdventurerController.cs" />
+    <Compile Include="Assets\_Game\Scripts\CommandsSystem\Commands\AttackCommand\AttackFactory.cs" />
     <Compile Include="Assets\_Game\Scripts\Infrastructure\EntityController.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\CommandFactory.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Commands\MoveCommand\MoveFactory.cs" />
+    <Compile Include="Assets\_Game\Scripts\CommandsSystem\Commands\AttackCommand\AttackConfig.cs" />
     <Compile Include="Assets\_Game\Scripts\Infrastructure\EntityFactory.cs" />
     <Compile Include="Assets\_Game\Scripts\Character\AdventurerModel.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Controller\CommandController.cs" />
     <Compile Include="Assets\_Game\Scripts\Infrastructure\EntityView.cs" />
+    <Compile Include="Assets\_Game\Scripts\Infrastructure\ActionContainer.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\View\CommandsView.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Model\CommandTargetType.cs" />
     <Compile Include="Assets\_Game\Scripts\Team\SelectionState.cs" />
@@ -75,7 +78,7 @@
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Model\CommandStatus.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Model\Command.cs" />
     <Compile Include="Assets\_Game\Scripts\Infrastructure\EntityModel.cs" />
-    <Compile Include="Assets\_Game\Scripts\CommandsSystem\Controller\CommandTimer.cs" />
+    <Compile Include="Assets\_Game\Scripts\CommandsSystem\Commands\AttackCommand\AttackCommand.cs" />
     <Compile Include="Assets\_Game\Scripts\Team\TeamController.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\View\CommandCardView.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

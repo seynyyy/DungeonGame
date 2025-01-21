@@ -28,5 +28,7 @@ namespace _Game.Scripts.Infrastructure
             var path = new NavMeshPath();
             return _agent.CalculatePath(position, path) && path.status == NavMeshPathStatus.PathComplete;
         }
+
+        public abstract void Attack(EntityController targetController);
     }
 }

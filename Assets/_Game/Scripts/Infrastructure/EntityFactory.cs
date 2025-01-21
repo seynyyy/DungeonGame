@@ -1,8 +1,11 @@
+using System;
 using _Game.Scripts.Character;
 using _Game.Scripts.CommandsSystem.Controller;
 using _Game.Scripts.Enemy;
+using _Game.Scripts.Infrastructure._Game.Scripts.Infrastructure;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace _Game.Scripts.Infrastructure
 {
@@ -25,16 +28,16 @@ namespace _Game.Scripts.Infrastructure
             var characterGO = Instantiate(entityPrefab, position, Quaternion.identity);
             characterGO.name = adventurerName;
 
+            var slider = characterGO.GetComponentInChildren<Slider>();
             var commandStorage = characterGO.AddComponent<CommandStorage>();
-            commandStorage.Init(adventurerData.commands);
-            
             var view = characterGO.AddComponent<AdventurerView>();
-            view.Init(color);
-
+            var adventurerController = characterGO.AddComponent<AdventurerController>();
             var model = new AdventurerModel(view, adventurerName, maxHp, hp, baseAtk, baseMs, baseCritRate,
                 baseCritDmg, commandStorage);
-
-            var adventurerController = characterGO.AddComponent<AdventurerController>();
+            ActionContainer<Action<int,int>> onHpChanged = new(model.OnHpChanged) ;
+            
+            commandStorage.Init(adventurerData.commands);
+            view.Init(onHpChanged,slider, color);
             adventurerController.Init(model, view);
 
             return adventurerController;
