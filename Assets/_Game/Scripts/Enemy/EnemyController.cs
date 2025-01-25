@@ -1,12 +1,13 @@
+using System.Threading.Tasks;
 using _Game.Scripts.Infrastructure;
 
 namespace _Game.Scripts.Enemy
 {
     public class EnemyController : EntityController
     {
-        public override void Attack(EntityController targetController)
+        public override async Task Attack(EntityController targetController)
         {
-            throw new System.NotImplementedException();
+            await Task.Delay(1000);
         }
     }
 }

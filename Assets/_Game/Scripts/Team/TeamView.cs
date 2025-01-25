@@ -56,7 +56,7 @@ namespace _Game.Scripts.Team
             var adventurerCard = Instantiate(adventurerCardPrefab, adventurersPanelContent);
             var adventurerCardView = adventurerCard.GetComponent<AdventurerCardView>();
 
-            adventurerModel.OnHpChanged += adventurerCardView.UpdateHealthBar;
+            adventurerModel.GetHpContainer(this).Subscribe(adventurerCardView.UpdateHealthBar);
             adventurerCardView.UpdateHealthBar(adventurerModel.Hp, adventurerModel.MaxHp);
 
             adventurerCardView.Init(teamController, adventurerController, adventurerModel.Name, null); //TODO: додати портрет

@@ -9,12 +9,16 @@ namespace _Game.Scripts.Infrastructure
     {
         private Slider _healthBar;
         private ActionContainer<Action<int, int>> _onHealthChanged;
+        private SpriteRenderer _spriteRenderer;
 
-        protected void Init(ActionContainer<Action<int, int>> onHealthChanged, Slider healthBar)
+        protected internal void Init(ActionContainer<Action<int, int>> onHealthChanged, Slider healthBar, Color color)
         {
             _onHealthChanged = onHealthChanged;
-            _onHealthChanged.Action += UpdateHealthBar;
+            onHealthChanged.Subscribe(UpdateHealthBar);
             _healthBar = healthBar;
+            
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _spriteRenderer.color = color;
         }
 
         private void UpdateHealthBar(int hp, int maxHp)
@@ -24,8 +28,7 @@ namespace _Game.Scripts.Infrastructure
 
         private void OnDestroy()
         {
-            if (_onHealthChanged != null)
-                _onHealthChanged.Action -= UpdateHealthBar;
+            _onHealthChanged?.Unsubscribe(UpdateHealthBar);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace _Game.Scripts.Infrastructure
 {
@@ -6,12 +7,11 @@ namespace _Game.Scripts.Infrastructure
     {
         public class ActionContainer<T> where T : Delegate
         {
-            public T Action { get; set; }
+            public T Action { get; private set; }
 
-            public ActionContainer(T action)
-            {
-                Action = action;
-            }
+            public void Subscribe(T action) => Action = (T)Delegate.Combine(Action, action);
+
+            public void Unsubscribe(T action) => Action = (T)Delegate.Remove(Action, action);
         }
     }
 }

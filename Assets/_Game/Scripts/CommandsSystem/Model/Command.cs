@@ -19,7 +19,7 @@ namespace _Game.Scripts.CommandsSystem.Model
         public CommandTargetType TargetType { get; private set; }
 
         public CommandStatus Status { get; private set; }
-        public ActionContainer<Action<float, float>> commandTimerContainer { get; private set; }
+        public readonly ActionContainer<Action<float, float>> CommandTimerContainer = new();
 
         public void SetDescription(string title, string description, Sprite displayImage)
         {
@@ -39,11 +39,9 @@ namespace _Game.Scripts.CommandsSystem.Model
         public void ChangeCooldownTimer(float timer)
         {
             CooldownTimer = Mathf.Clamp(timer, 0f, CooldownTime);
-            commandTimerContainer.Action?.Invoke(CooldownTimer, CooldownTime);
+            CommandTimerContainer.Action?.Invoke(CooldownTimer, CooldownTime);
         }
         
-        public void InitCommandTimer() => commandTimerContainer = new ActionContainer<Action<float, float>>((_, _) => { });
-
         public virtual void StartCommand()
         {
         }

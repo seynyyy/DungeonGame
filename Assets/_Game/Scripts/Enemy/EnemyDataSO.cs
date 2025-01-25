@@ -11,6 +11,7 @@ namespace _Game.Scripts.Enemy
         public int maxHp;
         public int hp;
         public int baseAtk = 1;
+        [Range(0.1f, 10f)] public float attackRange = 1f;
         public float baseMS = 1f;
         public float attackCooldown = 1f;
         [Range(0f, 1f)] public float baseCritRate = 0.1f;

@@ -18,6 +18,7 @@ MonoBehaviour:
   maxHp: 100
   hp: 50
   baseAtk: 10
+  attackRange: 2.01
   baseMS: 10
   attackCooldown: 10
   baseCritRate: 0.1

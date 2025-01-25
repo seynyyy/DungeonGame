@@ -1,5 +1,4 @@
-using System;
-using Unity.VisualScripting;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,20 +14,22 @@ namespace _Game.Scripts.Infrastructure
         {
             Model = model;
             _view = view;
-            
+
             _agent = gameObject.GetComponent<NavMeshAgent>();
             _agent.updateRotation = false;
             _agent.updateUpAxis = false;
         }
-        
-        public void MoveToPosition(Vector2 position) => _agent.SetDestination(position);
-        
+
+        public void MoveToPosition(Vector2 position) =>
+            _agent.SetDestination(position);
+
+
         public bool CanReachPosition(Vector2 position)
         {
             var path = new NavMeshPath();
             return _agent.CalculatePath(position, path) && path.status == NavMeshPathStatus.PathComplete;
         }
 
-        public abstract void Attack(EntityController targetController);
+        public abstract Task Attack(EntityController targetController);
     }
 }

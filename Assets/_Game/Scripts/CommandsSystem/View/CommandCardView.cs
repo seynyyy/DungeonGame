@@ -27,7 +27,7 @@ namespace _Game.Scripts.CommandsSystem.View
 
             displayImage.sprite = image;
             _commandTimerContainer = commandTimerContainer;
-            commandTimerContainer.Action += UpdateCardView;
+            commandTimerContainer.Subscribe(UpdateCardView);
 
             UpdateCardView(_command.CooldownTime, _command.CooldownTimer);
         }
@@ -39,7 +39,7 @@ namespace _Game.Scripts.CommandsSystem.View
 
         private void OnDestroy()
         {
-            _commandTimerContainer.Action -= UpdateCardView;
+            _commandTimerContainer.Unsubscribe(UpdateCardView);
             _commandController = null;
             _command = null;
         }

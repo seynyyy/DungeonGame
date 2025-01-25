@@ -1,10 +1,7 @@
-using System;
 using _Game.Scripts.Character;
 using _Game.Scripts.CommandsSystem.Controller;
 using _Game.Scripts.Enemy;
-using _Game.Scripts.Infrastructure._Game.Scripts.Infrastructure;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace _Game.Scripts.Infrastructure
@@ -21,6 +18,7 @@ namespace _Game.Scripts.Infrastructure
             var maxHp = adventurerData.maxHp;
             var hp = adventurerData.hp;
             var baseAtk = adventurerData.baseAtk;
+            var attackRange = adventurerData.attackRange;
             var baseMs = adventurerData.baseMS;
             var baseCritRate = adventurerData.baseCritRate;
             var baseCritDmg = adventurerData.baseCritDmg;
@@ -32,12 +30,11 @@ namespace _Game.Scripts.Infrastructure
             var commandStorage = characterGO.AddComponent<CommandStorage>();
             var view = characterGO.AddComponent<AdventurerView>();
             var adventurerController = characterGO.AddComponent<AdventurerController>();
-            var model = new AdventurerModel(view, adventurerName, maxHp, hp, baseAtk, baseMs, baseCritRate,
+            var model = new AdventurerModel(view, adventurerName, maxHp, hp, baseAtk, attackRange, baseMs, baseCritRate,
                 baseCritDmg, commandStorage);
-            ActionContainer<Action<int,int>> onHpChanged = new(model.OnHpChanged) ;
-            
+
             commandStorage.Init(adventurerData.commands);
-            view.Init(onHpChanged,slider, color);
+            view.Init(model.GetHpContainer(this), slider, color);
             adventurerController.Init(model, view);
 
             return adventurerController;
@@ -51,6 +48,7 @@ namespace _Game.Scripts.Infrastructure
             var maxHp = enemyData.maxHp;
             var hp = enemyData.hp;
             var baseAtk = enemyData.baseAtk;
+            var attackRange = enemyData.attackRange;
             var baseMs = enemyData.baseMS;
             var baseCritRate = enemyData.baseCritRate;
             var baseCritDmg = enemyData.baseCritDmg;
@@ -62,14 +60,15 @@ namespace _Game.Scripts.Infrastructure
             var commandStorage = characterGO.AddComponent<CommandStorage>();
             commandStorage.Init(enemyData.commands);
             */
+
+            var slider = characterGO.GetComponentInChildren<Slider>();
             
             var view = characterGO.AddComponent<EnemyView>();
-            view.Init(color);
-
-            var model = new EnemyModel(view, adventurerName, maxHp, hp, baseAtk, baseMs, baseCritRate,
-                baseCritDmg/*, commandStorage*/);
-
             var enemyController = characterGO.AddComponent<EnemyController>();
+            var model = new EnemyModel(view, adventurerName, maxHp, hp, baseAtk, attackRange, baseMs, baseCritRate,
+                baseCritDmg /*, commandStorage*/);
+
+            view.Init(model.GetHpContainer(this), slider, color);
             enemyController.Init(model, view);
 
             return enemyController;

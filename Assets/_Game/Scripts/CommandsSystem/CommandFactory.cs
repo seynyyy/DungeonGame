@@ -16,7 +16,6 @@ namespace _Game.Scripts.CommandsSystem
         {
             if (Command == null) return;
             Command.SetDescription(_config.Title, _config.Description, _config.DisplayImage);
-            Command.InitCommandTimer();
             Command.SetCooldown(_config.Cooldown);
             Command.SetCommandResourceCost(_config.CommandResourceCost);
             Command.SetTargetType(_config.TargetType);
@@ -24,6 +23,6 @@ namespace _Game.Scripts.CommandsSystem
             Command.ChangeStatus(CommandStatus.Ready);
         }
 
-        public virtual Command GetCommand() => Command;
+        public Command GetCommand() => Command;
     }
 }

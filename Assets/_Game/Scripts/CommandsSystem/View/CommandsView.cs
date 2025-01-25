@@ -32,7 +32,7 @@ namespace _Game.Scripts.CommandsSystem.View
             {
                 var commandCard = Instantiate(commandCardPrefab, commandPanelContent);
                 var commandCardView = commandCard.GetComponent<CommandCardView>();
-                commandCardView.Init(commandController, command, command.DisplayImage, command.commandTimerContainer);
+                commandCardView.Init(commandController, command, command.DisplayImage, command.CommandTimerContainer);
             }
         }
 
