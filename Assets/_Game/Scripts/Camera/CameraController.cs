@@ -23,7 +23,7 @@ namespace _Game.Scripts.Camera
             _onSelectAdventurer += commandController.SelectTarget;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             var xAxisValue = Input.GetAxis("Horizontal");
             var yAxisValue = Input.GetAxis("Vertical");

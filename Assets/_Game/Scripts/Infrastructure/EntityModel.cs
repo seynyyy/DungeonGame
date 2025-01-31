@@ -18,11 +18,7 @@ namespace _Game.Scripts.Infrastructure
 
         private readonly ActionContainer<Action<int, int>> _hpContainer = new();
 
-        public ActionContainer<Action<int, int>> GetHpContainer(object caller)
-        {
-            Debug.Log($"{this}, {caller}");
-            return _hpContainer;
-        }
+        public ActionContainer<Action<int, int>> GetHpContainer() => _hpContainer;
 
         public EntityView View { get; private set; }
 
@@ -40,10 +36,11 @@ namespace _Game.Scripts.Infrastructure
             BaseCritDmg = baseCritDmg;
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(int damage, bool isCritical)
         {
             Hp = Math.Max(0, Hp - damage);
             _hpContainer.Action?.Invoke(Hp, MaxHp);
+            View.ShowDamagePopUp(damage, isCritical);
         }
 
         public void TakeHeal(int heal)
@@ -52,16 +49,16 @@ namespace _Game.Scripts.Infrastructure
             _hpContainer.Action?.Invoke(Hp, MaxHp);
         }
 
-        public int CalculateDamage(EntityModel target)      
+        public (int, bool) CalculateDamage(EntityModel target)      
         {
             var damage = BaseAtk;
-
-            if (Random.Range(0f, 1f) > BaseCritRate)
+            var isCritical = Random.Range(0f, 1f) > BaseCritRate;
+            if (isCritical)
             {
                 damage = (int)(damage * BaseCritDmg);
             }
 
-            return damage;
+            return (damage, isCritical);
         }
     }
 }

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Enemy 1
   m_EditorClassIdentifier: 
   enemyName: Ginger
-  position: {x: -1, y: 0}
+  position: {x: 30, y: 0}
   color: {r: 0.7075472, g: 0.12348701, b: 0.12348701, a: 1}
-  maxHp: 1000
-  hp: 1000
+  maxHp: 100
+  hp: 100
   baseAtk: 10
   attackRange: 1
   baseMS: 2

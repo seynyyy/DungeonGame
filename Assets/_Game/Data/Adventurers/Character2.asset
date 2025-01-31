@@ -17,10 +17,12 @@ MonoBehaviour:
   color: {r: 1, g: 0, b: 0.6708684, a: 1}
   maxHp: 100
   hp: 50
-  baseAtk: 1
+  baseAtk: 10
+  attackRange: 1
   baseMS: 1
   attackCooldown: 1
-  baseCritRate: 0.1
-  baseCritDmg: 1
+  baseCritRate: 0.9
+  baseCritDmg: 5
   commands:
   - {fileID: 11400000, guid: 9d4f69d70c4573443b7bfb0af938df2d, type: 2}
+  - {fileID: 11400000, guid: b145dd7b37411894c971144185438a11, type: 2}

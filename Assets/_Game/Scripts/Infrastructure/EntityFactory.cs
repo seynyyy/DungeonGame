@@ -1,5 +1,6 @@
 using _Game.Scripts.Character;
 using _Game.Scripts.CommandsSystem.Controller;
+using _Game.Scripts.DamagePopUp;
 using _Game.Scripts.Enemy;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ namespace _Game.Scripts.Infrastructure
     public class EntityFactory : MonoBehaviour
     {
         [SerializeField] private GameObject entityPrefab;
+        [SerializeField] private DamagePopUpPool damagePopUpPool;
 
         public AdventurerController CreateAdventurer(AdventurerDataSo adventurerData)
         {
@@ -34,7 +36,7 @@ namespace _Game.Scripts.Infrastructure
                 baseCritDmg, commandStorage);
 
             commandStorage.Init(adventurerData.commands);
-            view.Init(model.GetHpContainer(this), slider, color);
+            view.Init(model.GetHpContainer(), slider, color, damagePopUpPool);
             adventurerController.Init(model, view);
 
             return adventurerController;
@@ -68,7 +70,7 @@ namespace _Game.Scripts.Infrastructure
             var model = new EnemyModel(view, adventurerName, maxHp, hp, baseAtk, attackRange, baseMs, baseCritRate,
                 baseCritDmg /*, commandStorage*/);
 
-            view.Init(model.GetHpContainer(this), slider, color);
+            view.Init(model.GetHpContainer(), slider, color, damagePopUpPool);
             enemyController.Init(model, view);
 
             return enemyController;

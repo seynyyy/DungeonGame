@@ -14,8 +14,8 @@ namespace _Game.Scripts.Character
                 await Task.Yield();
             }
             MoveToPosition(transform.position);
-            var damage = Model.CalculateDamage(target.Model);
-            target.Model.TakeDamage(damage);
+            var (damage, isCritical) = Model.CalculateDamage(target.Model);
+            target.Model.TakeDamage(damage, isCritical);
         }
     }
 }

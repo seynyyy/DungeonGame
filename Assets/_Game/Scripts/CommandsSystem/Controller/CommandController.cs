@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using _Game.Scripts.CommandsSystem.Failure;
 using _Game.Scripts.CommandsSystem.Model;
 using _Game.Scripts.CommandsSystem.View;
 using _Game.Scripts.Infrastructure;
 using _Game.Scripts.Team;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -13,6 +15,7 @@ namespace _Game.Scripts.CommandsSystem.Controller
     {
         [SerializeField] private TeamController teamController;
         [SerializeField] private CommandsView commandsView;
+        [SerializeField] private TMP_Text commandFailureText;
 
         private EntityController _ownerController;
         private EntityController _targetController;
@@ -47,33 +50,22 @@ namespace _Game.Scripts.CommandsSystem.Controller
             }
 
             _currentCommand = command;
-
-            switch (command.Status)
-            {
-                case CommandStatus.None:
-                    break;
-                case CommandStatus.Ready:
-                    Debug.Log("Command is ready");
-                    break;
-                case CommandStatus.Cooldown:
-                    Debug.Log("Command is on cooldown");
-                    break;
-                case CommandStatus.NeedResource:
-                    Debug.Log("Need more resource");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
         }
 
         public void SelectPosition(Vector2 position)
         {
             if (_currentCommand == null) return;
             _targetPosition = position;
-            
-            if (!_currentCommand.CheckCondition(_ownerController, _targetController, _targetPosition)) return;
-            if (_currentCommand.Status == CommandStatus.Cooldown) return;
-            
+
+            var failureReason = _currentCommand.CheckCondition(_ownerController, _targetController, _targetPosition);
+
+            if (failureReason != FailureReason.None)
+            {
+                commandFailureText.text = FailureReasonHandler.GetFailureReasonString(failureReason);
+                return;
+            }
+            commandFailureText.text = $"Successfully applied command {_currentCommand.Title}";
+
             _currentCommand.ApplyCommand();
             _currentCommand = null;
             teamController.SetSelectionState(SelectionState.None);
@@ -83,12 +75,19 @@ namespace _Game.Scripts.CommandsSystem.Controller
         {
             if (_currentCommand == null) return;
             _targetController = target;
-            
-            if (!_currentCommand.CheckCondition(_ownerController, _targetController, _targetPosition)) return;
-            if (_currentCommand.Status == CommandStatus.Cooldown) return;
-            
+
+            var failureReason = _currentCommand.CheckCondition(_ownerController, _targetController, _targetPosition);
+
+            if (failureReason != FailureReason.None)
+            {
+                commandFailureText.text = FailureReasonHandler.GetFailureReasonString(failureReason);
+                return;
+            }
+            commandFailureText.text = $"Successfully applied command {_currentCommand.Title}";
+
             _currentCommand.ApplyCommand();
             _currentCommand = null;
+            _targetController = null;
             teamController.SetSelectionState(SelectionState.None);
         }
     }

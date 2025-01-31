@@ -56,13 +56,17 @@
     <Compile Include="Assets\_Game\Scripts\Infrastructure\EntityFactory.cs" />
     <Compile Include="Assets\_Game\Scripts\Character\AdventurerModel.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Controller\CommandController.cs" />
+    <Compile Include="Assets\_Game\Scripts\DamagePopUp\DamagePopUpPool.cs" />
     <Compile Include="Assets\_Game\Scripts\Infrastructure\EntityView.cs" />
     <Compile Include="Assets\_Game\Scripts\Infrastructure\ActionContainer.cs" />
+    <Compile Include="Assets\_Game\Scripts\CommandsSystem\Failure\FailureReason.cs" />
+    <Compile Include="Assets\_Game\Scripts\DamagePopUp\DamagePopUp.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\View\CommandsView.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Model\CommandTargetType.cs" />
     <Compile Include="Assets\_Game\Scripts\Team\SelectionState.cs" />
     <Compile Include="Assets\_Game\Scripts\Character\AdventurerDataSo.cs" />
     <Compile Include="Assets\_Game\Scripts\EntryPoint.cs" />
+    <Compile Include="Assets\_Game\Scripts\CommandsSystem\Failure\FailureReasonHandler.cs" />
     <Compile Include="Assets\_Game\Scripts\Enemy\EnemyController.cs" />
     <Compile Include="Assets\_Game\Scripts\Enemy\EnemyModel.cs" />
     <Compile Include="Assets\_Game\Scripts\Enemy\EnemyDataSO.cs" />

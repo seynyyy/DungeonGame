@@ -1,5 +1,6 @@
 using System;
 using _Game.Scripts.CommandsSystem.Controller;
+using _Game.Scripts.CommandsSystem.Failure;
 using _Game.Scripts.Infrastructure;
 using _Game.Scripts.Infrastructure._Game.Scripts.Infrastructure;
 using UnityEngine;
@@ -45,10 +46,14 @@ namespace _Game.Scripts.CommandsSystem.Model
         public virtual void StartCommand()
         {
         }
-
-        public virtual bool CheckCondition(EntityController owner, EntityController target, Vector2 location)
+        
+        public virtual void EndCommand()
         {
-            return false;
+        }
+
+        public virtual FailureReason CheckCondition(EntityController owner, EntityController target, Vector2 location)
+        {
+            return FailureReason.None;
         }
 
         public virtual void ApplyCommand()
