@@ -2,6 +2,7 @@ using System;
 using _Game.Scripts.Character;
 using _Game.Scripts.CommandsSystem;
 using _Game.Scripts.CommandsSystem.View;
+using _Game.Scripts.Infrastructure._Game.Scripts.Infrastructure;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,19 +11,21 @@ namespace _Game.Scripts.Team
 {
     public class TeamView : MonoBehaviour
     {
-        [Header("Controllers")] [SerializeField]
-        private TeamController teamController;
+        [Header("Controllers")] 
+        [SerializeField] private TeamController teamController;
 
-        [Header("Prefabs")] [SerializeField] private GameObject adventurerCardPrefab;
+        [Header("Prefabs")] 
+        [SerializeField] private GameObject adventurerCardPrefab;
         [SerializeField] private GameObject commandCardPrefab;
 
-        [Header("UI")] [SerializeField] private Transform adventurersPanelContent;
+        [Header("UI")] 
+        [SerializeField] private Transform adventurersPanelContent;
         [SerializeField] private GameObject selectionPopup;
         [SerializeField] private TMP_Text selectionPopupText;
 
-        public void Init(ref Action<SelectionState> onSelectionStateChanged)
+        public void Init(ActionContainer<Action<SelectionState>>  onSelectionStateChanged)
         {
-            onSelectionStateChanged += OnSelectionStateChanged;
+            onSelectionStateChanged.Subscribe(OnSelectionStateChanged);
         }
         
         private void OnSelectionStateChanged(SelectionState selectionState)

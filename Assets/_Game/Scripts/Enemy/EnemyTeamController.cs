@@ -17,13 +17,13 @@ namespace _Game.Scripts.Enemy
 
         private readonly List<EnemyController> _enemies = new();
 
-        private void RegisterAdventurer(EnemyController enemy)
+        private void RegisterEnemy(EnemyController enemy)
         {
             _enemies.Add(enemy);
             OnEnemyRegistered?.Invoke(enemy);
         }
 
-        public void UnregisterAdventurer(EnemyController enemy)
+        public void UnregisterEnemy(EnemyController enemy)
         {
             _enemies.Remove(enemy);
             OnEnemyUnregistered?.Invoke(enemy);
@@ -39,7 +39,7 @@ namespace _Game.Scripts.Enemy
             foreach (var data in adventurersData)
             {
                 var enemyController = entityFactory.CreateEnemy(data);
-                RegisterAdventurer(enemyController);
+                RegisterEnemy(enemyController);
             }
         }
     }

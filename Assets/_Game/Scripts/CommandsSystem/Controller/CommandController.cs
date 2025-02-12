@@ -24,7 +24,7 @@ namespace _Game.Scripts.CommandsSystem.Controller
 
         public void Init()
         {
-            commandsView.Init(ref teamController.OnAdventurerSelected);
+            commandsView.Init(teamController.OnAdventurerSelected);
         }
 
         public void SelectCommand(Command command)

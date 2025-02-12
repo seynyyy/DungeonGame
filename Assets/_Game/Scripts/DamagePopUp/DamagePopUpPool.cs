@@ -6,38 +6,34 @@ namespace _Game.Scripts.DamagePopUp
     public class DamagePopUpPool : MonoBehaviour
     {
         [SerializeField] private GameObject damagePopUpPrefab;
-
         private readonly Queue<DamagePopUp> _pool = new();
 
         private void Awake()
         {
-            const int count = 10;
-            for (var i = 0; i < count; i++)
+            for (int i = 0; i < 10; i++)
             {
-                var popUp = Instantiate(damagePopUpPrefab, gameObject.transform).GetComponent<DamagePopUp>();
-                popUp.Init(this);
-                _pool.Enqueue(popUp);
+                _pool.Enqueue(CreatePopUp());
             }
         }
 
         public void ShowDamagePopUp(int damage, bool isCrit, Vector2 position)
         {
-            if (_pool.TryDequeue(out var popUp))
-            {
-                popUp.Show(damage, isCrit, position);
-                popUp.gameObject.SetActive(true);
-            }
-            else
-            {
-                popUp = Instantiate(damagePopUpPrefab, gameObject.transform).GetComponent<DamagePopUp>();
-                popUp.Init(this);
-            }
+            var popUp = _pool.Count > 0 ? _pool.Dequeue() : CreatePopUp();
+            popUp.Show(damage, isCrit, position);
+            popUp.gameObject.SetActive(true);
         }
 
         public void HideDamagePopUp(DamagePopUp popUp)
         {
             popUp.gameObject.SetActive(false);
             _pool.Enqueue(popUp);
+        }
+
+        private DamagePopUp CreatePopUp()
+        {
+            var popUp = Instantiate(damagePopUpPrefab, transform).GetComponent<DamagePopUp>();
+            popUp.Init(this);
+            return popUp;
         }
     }
 }

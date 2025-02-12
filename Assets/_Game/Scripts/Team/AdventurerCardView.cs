@@ -22,12 +22,12 @@ namespace _Game.Scripts.Team
         {
             _teamController = teamController;
             _adventurerController = adventurerController;
-            _teamController.OnAdventurerSelected += CardSelected;
+            _teamController.OnAdventurerSelected.Subscribe(CardSelected);
             
             nameText.text = adventurerName;
             portraitImage.sprite = portrait;
             
-            GetComponent<Button>().onClick.AddListener(() => _teamController.SelectAdventurer(_adventurerController));;
+            GetComponent<Button>().onClick.AddListener(() => _teamController.SelectAdventurer(_adventurerController));
         }
         
         public void UpdateHealthBar(int hp, int maxHp)

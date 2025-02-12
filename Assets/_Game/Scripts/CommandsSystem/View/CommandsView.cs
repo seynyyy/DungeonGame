@@ -1,6 +1,7 @@
 using System;
 using _Game.Scripts.Character;
 using _Game.Scripts.CommandsSystem.Controller;
+using _Game.Scripts.Infrastructure._Game.Scripts.Infrastructure;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -12,9 +13,9 @@ namespace _Game.Scripts.CommandsSystem.View
         [SerializeField] private Transform commandPanelContent;
         [SerializeField] private GameObject commandCardPrefab;
 
-        public void Init(ref Action<AdventurerController> onAdventurerSelected)
+        public void Init(ActionContainer<Action<AdventurerController>> onAdventurerSelected)
         {
-            onAdventurerSelected += UpdateCommandPanel;
+            onAdventurerSelected.Subscribe(UpdateCommandPanel);
         }
 
         private void UpdateCommandPanel(AdventurerController selectedAdventurer)
