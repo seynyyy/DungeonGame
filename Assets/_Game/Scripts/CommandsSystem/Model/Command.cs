@@ -1,8 +1,6 @@
 using System;
-using _Game.Scripts.CommandsSystem.Controller;
 using _Game.Scripts.CommandsSystem.Failure;
 using _Game.Scripts.Infrastructure;
-using _Game.Scripts.Infrastructure._Game.Scripts.Infrastructure;
 using UnityEngine;
 
 namespace _Game.Scripts.CommandsSystem.Model

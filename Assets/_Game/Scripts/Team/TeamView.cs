@@ -1,10 +1,7 @@
 using System;
 using _Game.Scripts.Character;
-using _Game.Scripts.CommandsSystem;
-using _Game.Scripts.CommandsSystem.View;
-using _Game.Scripts.Infrastructure._Game.Scripts.Infrastructure;
+using _Game.Scripts.Infrastructure;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _Game.Scripts.Team
@@ -54,15 +51,15 @@ namespace _Game.Scripts.Team
         }
 
 
-        public void CreateAdventurerCardView(AdventurerModel adventurerModel, AdventurerController adventurerController)
+        public void CreateAdventurerCardView(AdventurerController adventurerController)
         {
             var adventurerCard = Instantiate(adventurerCardPrefab, adventurersPanelContent);
             var adventurerCardView = adventurerCard.GetComponent<AdventurerCardView>();
 
-            adventurerModel.GetHpContainer().Subscribe(adventurerCardView.UpdateHealthBar);
-            adventurerCardView.UpdateHealthBar(adventurerModel.Hp, adventurerModel.MaxHp);
+            adventurerController.GetHpContainer().Subscribe(adventurerCardView.UpdateHealthBar);
+            adventurerCardView.UpdateHealthBar(adventurerController.Hp, adventurerController.MaxHp);
 
-            adventurerCardView.Init(teamController, adventurerController, adventurerModel.Name, null); //TODO: додати портрет
+            adventurerCardView.Init(teamController, adventurerController, adventurerController.Name, null); //TODO: додати портрет
         }
     }
 }

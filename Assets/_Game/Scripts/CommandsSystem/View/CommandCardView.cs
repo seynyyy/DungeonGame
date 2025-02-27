@@ -1,7 +1,7 @@
 using System;
 using _Game.Scripts.CommandsSystem.Controller;
 using _Game.Scripts.CommandsSystem.Model;
-using _Game.Scripts.Infrastructure._Game.Scripts.Infrastructure;
+using _Game.Scripts.Infrastructure;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

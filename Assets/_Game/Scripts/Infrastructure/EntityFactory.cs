@@ -25,19 +25,19 @@ namespace _Game.Scripts.Infrastructure
             var baseCritRate = adventurerData.baseCritRate;
             var baseCritDmg = adventurerData.baseCritDmg;
 
-            var characterGO = Instantiate(entityPrefab, position, Quaternion.identity);
-            characterGO.name = adventurerName;
+            var characterGo = Instantiate(entityPrefab, position, Quaternion.identity);
+            characterGo.name = adventurerName;
 
-            var slider = characterGO.GetComponentInChildren<Slider>();
-            var commandStorage = characterGO.AddComponent<CommandStorage>();
-            var view = characterGO.AddComponent<AdventurerView>();
-            var adventurerController = characterGO.AddComponent<AdventurerController>();
-            var model = new AdventurerModel(view, adventurerName, maxHp, hp, baseAtk, attackRange, baseMs, baseCritRate,
-                baseCritDmg, commandStorage);
+            var slider = characterGo.GetComponentInChildren<Slider>();
+            var commandStorage = characterGo.AddComponent<CommandStorage>();
+            var healthBar = characterGo.AddComponent<EntityHealthBar>();
+            var damagePopUp = characterGo.AddComponent<EntityDamagePopUp>();
+            var adventurerController = characterGo.AddComponent<AdventurerController>();
 
+            adventurerController.Init(adventurerName, maxHp, hp, baseAtk, attackRange, baseMs, baseCritRate, baseCritDmg, commandStorage);
             commandStorage.Init(adventurerData.commands);
-            view.Init(model.GetHpContainer(), slider, color, damagePopUpPool);
-            adventurerController.Init(model, view);
+            healthBar.Init(adventurerController.GetHpContainer(), slider, color);
+            damagePopUp.Init(damagePopUpPool);
 
             return adventurerController;
         }
@@ -55,23 +55,23 @@ namespace _Game.Scripts.Infrastructure
             var baseCritRate = enemyData.baseCritRate;
             var baseCritDmg = enemyData.baseCritDmg;
 
-            var characterGO = Instantiate(entityPrefab, position, Quaternion.identity);
-            characterGO.name = adventurerName;
+            var enemyGo = Instantiate(entityPrefab, position, Quaternion.identity);
+            enemyGo.name = adventurerName;
 
             /*
             var commandStorage = characterGO.AddComponent<CommandStorage>();
             commandStorage.Init(enemyData.commands);
             */
 
-            var slider = characterGO.GetComponentInChildren<Slider>();
+            var slider = enemyGo.GetComponentInChildren<Slider>();
             
-            var view = characterGO.AddComponent<EnemyView>();
-            var enemyController = characterGO.AddComponent<EnemyController>();
-            var model = new EnemyModel(view, adventurerName, maxHp, hp, baseAtk, attackRange, baseMs, baseCritRate,
-                baseCritDmg /*, commandStorage*/);
+            var healthBar = enemyGo.AddComponent<EnemyHealthBar>();
+            var entityDamagePopUp = enemyGo.AddComponent<EntityDamagePopUp>();
+            var enemyController = enemyGo.AddComponent<EnemyController>();
 
-            view.Init(model.GetHpContainer(), slider, color, damagePopUpPool);
-            enemyController.Init(model, view);
+            healthBar.Init(enemyController.GetHpContainer(), slider, color);
+            entityDamagePopUp.Init(damagePopUpPool);
+            enemyController.Init(adventurerName, maxHp, hp, baseAtk, attackRange, baseMs, baseCritRate, baseCritDmg);
 
             return enemyController;
         }

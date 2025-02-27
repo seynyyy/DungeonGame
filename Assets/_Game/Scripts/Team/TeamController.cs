@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using _Game.Scripts.Character;
 using _Game.Scripts.Infrastructure;
-using _Game.Scripts.Infrastructure._Game.Scripts.Infrastructure;
 using UnityEngine;
 
 namespace _Game.Scripts.Team
@@ -12,26 +11,28 @@ namespace _Game.Scripts.Team
         [SerializeField] private List<AdventurerDataSo> adventurersData;
         [SerializeField] private EntityFactory entityFactory;
         [SerializeField] private TeamView teamView;
-        
-        [HideInInspector] public AdventurerController selectedAdventurer; // TODO: Придумати показ команд для випадку null
+
+        [HideInInspector]
+        public AdventurerController selectedAdventurer; // TODO: Придумати показ команд для випадку null
+
         public readonly ActionContainer<Action<AdventurerController>> OnAdventurerSelected = new();
-        
+
         private readonly List<AdventurerController> _adventurers = new();
         public Action<AdventurerController> OnAdventurerRegistered;
 
-        private readonly ActionContainer<Action<SelectionState>>  _onSelectionStateChanged = new();
+        private readonly ActionContainer<Action<SelectionState>> _onSelectionStateChanged = new();
 
         public SelectionState SelectionState { get; private set; }
-        
+
         public IEnumerable<AdventurerController> GetAdventurers() => _adventurers;
-        public int GetAdventurersCount() => _adventurers.Count;
+        private int GetAdventurersCount() => _adventurers.Count;
 
         public void SetSelectionState(SelectionState state)
         {
             SelectionState = state;
             _onSelectionStateChanged.Action?.Invoke(state);
         }
-        
+
         private void RegisterAdventurer(AdventurerController adventurer)
         {
             _adventurers.Add(adventurer);
@@ -56,11 +57,11 @@ namespace _Game.Scripts.Team
             {
                 var adventurerController = entityFactory.CreateAdventurer(data);
                 RegisterAdventurer(adventurerController);
-                
-                teamView.CreateAdventurerCardView(adventurerController.Model as AdventurerModel, adventurerController);
+
+                teamView.CreateAdventurerCardView(adventurerController);
             }
         }
-        
+
         public void SelectAdventurer(AdventurerController adventurerController)
         {
             if (selectedAdventurer == adventurerController)
@@ -73,6 +74,7 @@ namespace _Game.Scripts.Team
                 selectedAdventurer = adventurerController;
                 SetSelectionState(SelectionState.CommandSelection);
             }
+
             OnAdventurerSelected.Action?.Invoke(selectedAdventurer);
         }
 
@@ -88,14 +90,14 @@ namespace _Game.Scripts.Team
                 var p2 = points[i + 1];
                 var p3 = i + 2 < points.Count ? points[i + 2] : points[i + 1];
 
-                for (var j = 0; j < curveResolution; j++)
+                for (int j = 0; j < curveResolution; j++)
                 {
-                    var t = j / (float)curveResolution;
+                    float t = j / (float)curveResolution;
                     var point = CatmullRomInterpolate(p0, p1, p2, p3, t);
                     smoothPoints.Add(point);
                 }
             }
-            
+
             var totalLength = 0f;
             var placementPoints = new List<Vector2>();
             var numUnits = _adventurers.Count;
@@ -121,19 +123,19 @@ namespace _Game.Scripts.Team
                 placementPoints.Add(smoothPoints[i]);
                 currentDistance = 0f;
             }
-            
+
             if (placementPoints.Count < numUnits)
             {
                 placementPoints.Add(smoothPoints[^1]);
             }
-            
+
             // 4. Розміщуємо юнітів
             for (var i = 0; i < GetAdventurersCount(); i++)
             {
                 _adventurers[i].MoveToPosition(placementPoints[i]);
             }
         }
-        
+
         private static Vector2 CatmullRomInterpolate(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3, float t)
         {
             var t2 = t * t;

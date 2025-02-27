@@ -46,20 +46,20 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.31f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="C:\Users\Ілля\Downloads\NavMeshPlus-master\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshModifierTilemapEditor.cs" />
-    <Compile Include="C:\Users\Ілля\Downloads\NavMeshPlus-master\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshLinkEditor.cs" />
-    <Compile Include="C:\Users\Ілля\Downloads\NavMeshPlus-master\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshModifierVolumeEditor.cs" />
-    <Compile Include="C:\Users\Ілля\Downloads\NavMeshPlus-master\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshModifierEditor.cs" />
-    <Compile Include="C:\Users\Ілля\Downloads\NavMeshPlus-master\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshSurfaceEditor.cs" />
-    <Compile Include="C:\Users\Ілля\Downloads\NavMeshPlus-master\NavMeshPlus-master\NavMeshComponents\Editor\RootSources2dEditor.cs" />
-    <Compile Include="C:\Users\Ілля\Downloads\NavMeshPlus-master\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshComponentsGUIUtility.cs" />
-    <Compile Include="C:\Users\Ілля\Downloads\NavMeshPlus-master\NavMeshPlus-master\NavMeshComponents\Editor\CollectSourcesCache2dEditor.cs" />
-    <Compile Include="C:\Users\Ілля\Downloads\NavMeshPlus-master\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshAssetManager.cs" />
-    <Compile Include="C:\Users\Ілля\Downloads\NavMeshPlus-master\NavMeshPlus-master\NavMeshComponents\Editor\AgentOverride2dEditor.cs" />
-    <Compile Include="C:\Users\Ілля\Downloads\NavMeshPlus-master\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshAgentAttributePropertyDrawer.cs" />
-    <Compile Include="C:\Users\Ілля\Downloads\NavMeshPlus-master\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshAreaAttributePropertyDrawer.cs" />
-    <Compile Include="C:\Users\Ілля\Downloads\NavMeshPlus-master\NavMeshPlus-master\NavMeshComponents\Editor\CollectSources2dEditor.cs" />
-    <None Include="C:\Users\Ілля\Downloads\NavMeshPlus-master\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshComponentsEditor.asmdef" />
+    <Compile Include="C:\Users\zenia\Downloads\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshModifierTilemapEditor.cs" />
+    <Compile Include="C:\Users\zenia\Downloads\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshLinkEditor.cs" />
+    <Compile Include="C:\Users\zenia\Downloads\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshModifierVolumeEditor.cs" />
+    <Compile Include="C:\Users\zenia\Downloads\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshModifierEditor.cs" />
+    <Compile Include="C:\Users\zenia\Downloads\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshSurfaceEditor.cs" />
+    <Compile Include="C:\Users\zenia\Downloads\NavMeshPlus-master\NavMeshComponents\Editor\RootSources2dEditor.cs" />
+    <Compile Include="C:\Users\zenia\Downloads\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshComponentsGUIUtility.cs" />
+    <Compile Include="C:\Users\zenia\Downloads\NavMeshPlus-master\NavMeshComponents\Editor\CollectSourcesCache2dEditor.cs" />
+    <Compile Include="C:\Users\zenia\Downloads\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshAssetManager.cs" />
+    <Compile Include="C:\Users\zenia\Downloads\NavMeshPlus-master\NavMeshComponents\Editor\AgentOverride2dEditor.cs" />
+    <Compile Include="C:\Users\zenia\Downloads\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshAgentAttributePropertyDrawer.cs" />
+    <Compile Include="C:\Users\zenia\Downloads\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshAreaAttributePropertyDrawer.cs" />
+    <Compile Include="C:\Users\zenia\Downloads\NavMeshPlus-master\NavMeshComponents\Editor\CollectSources2dEditor.cs" />
+    <None Include="C:\Users\zenia\Downloads\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshComponentsEditor.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.31f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -417,14 +417,8 @@
     <Reference Include="UnityEditor.Graphs">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.31f1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.WebGL.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.31f1\Editor\Data\PlaybackEngines\WebGLSupport\UnityEditor.WebGL.Extensions.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.31f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Android.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.31f1\Editor\Data\PlaybackEngines\AndroidPlayer\UnityEditor.Android.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.YamlDotNet">
       <HintPath>C:\Dungeon\Library\PackageCache\com.unity.visualscripting\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
@@ -458,12 +452,6 @@
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>C:\Dungeon\Library\PackageCache\com.unity.nuget.mono-cecil\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Android.Types">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.31f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Android.Gradle">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.31f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.31f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\mscorlib.dll</HintPath>

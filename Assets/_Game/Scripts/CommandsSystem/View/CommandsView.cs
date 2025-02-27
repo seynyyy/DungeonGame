@@ -1,8 +1,7 @@
 using System;
 using _Game.Scripts.Character;
 using _Game.Scripts.CommandsSystem.Controller;
-using _Game.Scripts.Infrastructure._Game.Scripts.Infrastructure;
-using Unity.VisualScripting;
+using _Game.Scripts.Infrastructure;
 using UnityEngine;
 
 namespace _Game.Scripts.CommandsSystem.View
@@ -27,9 +26,8 @@ namespace _Game.Scripts.CommandsSystem.View
             }
 
             ClearCommandPanel();
-            var model = selectedAdventurer.Model as AdventurerModel;
 
-            foreach (var command in model?.GetCommandStorage().GetCommands()!)
+            foreach (var command in selectedAdventurer.GetCommandStorage().GetCommands()!)
             {
                 var commandCard = Instantiate(commandCardPrefab, commandPanelContent);
                 var commandCardView = commandCard.GetComponent<CommandCardView>();

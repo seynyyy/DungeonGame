@@ -31,14 +31,14 @@ namespace _Game.Scripts.CommandsSystem.Commands.AttackCommand
         private async Task Attack()
         {
             _ownerController.MoveToPosition(_targetController.transform.position);
-            while (Vector2.Distance(_ownerController.transform.position, _targetController.transform.position) > _ownerController.Model.AttackRange)
+            while (Vector2.Distance(_ownerController.transform.position, _targetController.transform.position) > _ownerController.AttackRange)
             {
                 await Task.Yield();
             }
             _ownerController.MoveToPosition(_ownerController.transform.position);
-            var (damage, isCritical) = _ownerController.Model.CalculateDamage(_targetController.Model);
+            var (damage, isCritical) = _ownerController.CalculateDamage(_targetController);
             EndCommand();
-            _targetController.Model.TakeDamage(damage, isCritical);
+            _targetController.TakeDamage(damage, isCritical);
         }
 
         public override void EventTick(float deltaTime)

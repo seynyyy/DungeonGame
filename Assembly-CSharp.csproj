@@ -47,33 +47,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Commands\MoveCommand\MoveConfig.cs" />
+    <Compile Include="Assets\_Game\Scripts\Infrastructure\EntityHealthBar.cs" />
     <Compile Include="Assets\_Game\Scripts\Character\AdventurerController.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Commands\AttackCommand\AttackFactory.cs" />
     <Compile Include="Assets\_Game\Scripts\Infrastructure\EntityController.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\CommandFactory.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Commands\MoveCommand\MoveFactory.cs" />
+    <Compile Include="Assets\_Game\Scripts\Enemy\EnemyHealthBar.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Commands\AttackCommand\AttackConfig.cs" />
     <Compile Include="Assets\_Game\Scripts\Infrastructure\EntityFactory.cs" />
-    <Compile Include="Assets\_Game\Scripts\Character\AdventurerModel.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Controller\CommandController.cs" />
     <Compile Include="Assets\_Game\Scripts\DamagePopUp\DamagePopUpPool.cs" />
-    <Compile Include="Assets\_Game\Scripts\Infrastructure\EntityView.cs" />
     <Compile Include="Assets\_Game\Scripts\Infrastructure\ActionContainer.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Failure\FailureReason.cs" />
     <Compile Include="Assets\_Game\Scripts\DamagePopUp\DamagePopUp.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\View\CommandsView.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Model\CommandTargetType.cs" />
     <Compile Include="Assets\_Game\Scripts\Team\SelectionState.cs" />
+    <Compile Include="Assets\_Game\Scripts\Infrastructure\EntityDamagePopUp.cs" />
     <Compile Include="Assets\_Game\Scripts\Character\AdventurerDataSo.cs" />
     <Compile Include="Assets\_Game\Scripts\EntryPoint.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Failure\FailureReasonHandler.cs" />
     <Compile Include="Assets\_Game\Scripts\Enemy\EnemyController.cs" />
-    <Compile Include="Assets\_Game\Scripts\Enemy\EnemyModel.cs" />
     <Compile Include="Assets\_Game\Scripts\Enemy\EnemyDataSO.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Controller\CommandStorage.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Commands\MoveCommand\MoveCommand.cs" />
-    <Compile Include="Assets\_Game\Scripts\Character\AdventurerView.cs" />
-    <Compile Include="Assets\_Game\Scripts\Enemy\EnemyView.cs" />
     <Compile Include="Assets\_Game\Scripts\Team\AdventurerCardView.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Model\CommandConfig.cs" />
     <Compile Include="Assets\_Game\Scripts\Camera\CameraController.cs" />
@@ -81,14 +79,13 @@
     <Compile Include="Assets\_Game\Scripts\Enemy\EnemyTeamController.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Model\CommandStatus.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Model\Command.cs" />
-    <Compile Include="Assets\_Game\Scripts\Infrastructure\EntityModel.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\Commands\AttackCommand\AttackCommand.cs" />
     <Compile Include="Assets\_Game\Scripts\Team\TeamController.cs" />
     <Compile Include="Assets\_Game\Scripts\CommandsSystem\View\CommandCardView.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />
-    <None Include="C:\Users\Ілля\Downloads\NavMeshPlus-master\NavMeshPlus-master\package.json" />
+    <None Include="C:\Users\zenia\Downloads\NavMeshPlus-master\package.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
@@ -470,12 +467,6 @@
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>C:\Dungeon\Library\PackageCache\com.unity.nuget.mono-cecil\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Android.Types">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.31f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Android.Gradle">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.31f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.31f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
