@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using _Game.Scripts.Character;
 using _Game.Scripts.Infrastructure;
+using _Game.Scripts.Infrastructure.Entity;
 using UnityEngine;
 
 namespace _Game.Scripts.Team
@@ -16,33 +18,18 @@ namespace _Game.Scripts.Team
         public AdventurerController selectedAdventurer; // TODO: Придумати показ команд для випадку null
 
         public readonly ActionContainer<Action<AdventurerController>> OnAdventurerSelected = new();
-
-        private readonly List<AdventurerController> _adventurers = new();
-        public Action<AdventurerController> OnAdventurerRegistered;
-
+        
         private readonly ActionContainer<Action<SelectionState>> _onSelectionStateChanged = new();
 
         public SelectionState SelectionState { get; private set; }
 
-        public IEnumerable<AdventurerController> GetAdventurers() => _adventurers;
-        private int GetAdventurersCount() => _adventurers.Count;
+        private IEnumerable<AdventurerController> GetAdventurers() => EntityRepository.GetAdventurers();
+        private int GetAdventurersCount() => GetAdventurers().Count();
 
         public void SetSelectionState(SelectionState state)
         {
             SelectionState = state;
             _onSelectionStateChanged.Action?.Invoke(state);
-        }
-
-        private void RegisterAdventurer(AdventurerController adventurer)
-        {
-            _adventurers.Add(adventurer);
-            OnAdventurerRegistered?.Invoke(adventurer);
-        }
-
-        public void UnregisterAdventurer(AdventurerController adventurer)
-        {
-            _adventurers.Remove(adventurer);
-            OnAdventurerRegistered?.Invoke(adventurer);
         }
 
         public void Init()
@@ -56,7 +43,7 @@ namespace _Game.Scripts.Team
             foreach (var data in adventurersData)
             {
                 var adventurerController = entityFactory.CreateAdventurer(data);
-                RegisterAdventurer(adventurerController);
+                EntityRepository.Add(adventurerController);
 
                 teamView.CreateAdventurerCardView(adventurerController);
             }
@@ -100,7 +87,7 @@ namespace _Game.Scripts.Team
 
             var totalLength = 0f;
             var placementPoints = new List<Vector2>();
-            var numUnits = _adventurers.Count;
+            var numUnits = GetAdventurersCount();
 
             // 1. Обчислюємо загальну довжину кривої
             for (var i = 1; i < smoothPoints.Count; i++)
@@ -130,9 +117,10 @@ namespace _Game.Scripts.Team
             }
 
             // 4. Розміщуємо юнітів
-            for (var i = 0; i < GetAdventurersCount(); i++)
+            var adventurers = GetAdventurers().ToArray();
+            for (int i = 0; i < Math.Min(adventurers.Length, placementPoints.Count); i++)
             {
-                _adventurers[i].MoveToPosition(placementPoints[i]);
+                adventurers[i].MoveToPosition(placementPoints[i]);
             }
         }
 

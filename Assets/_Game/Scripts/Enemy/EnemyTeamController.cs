@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using _Game.Scripts.Infrastructure;
+using _Game.Scripts.Infrastructure.Entity;
 using UnityEngine;
 
 namespace _Game.Scripts.Enemy

@@ -1,7 +1,7 @@
 using _Game.Scripts.DamagePopUp;
 using UnityEngine;
 
-namespace _Game.Scripts.Infrastructure
+namespace _Game.Scripts.Infrastructure.Entity
 {
     public class EntityDamagePopUp : MonoBehaviour
     {

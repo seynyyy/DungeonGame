@@ -5,7 +5,7 @@ using _Game.Scripts.Enemy;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Game.Scripts.Infrastructure
+namespace _Game.Scripts.Infrastructure.Entity
 {
     public class EntityFactory : MonoBehaviour
     {
@@ -21,6 +21,7 @@ namespace _Game.Scripts.Infrastructure
             var hp = adventurerData.hp;
             var baseAtk = adventurerData.baseAtk;
             var attackRange = adventurerData.attackRange;
+            var seekRange = adventurerData.seekRange;
             var baseMs = adventurerData.baseMS;
             var baseCritRate = adventurerData.baseCritRate;
             var baseCritDmg = adventurerData.baseCritDmg;
@@ -34,7 +35,9 @@ namespace _Game.Scripts.Infrastructure
             var damagePopUp = characterGo.AddComponent<EntityDamagePopUp>();
             var adventurerController = characterGo.AddComponent<AdventurerController>();
 
-            adventurerController.Init(adventurerName, maxHp, hp, baseAtk, attackRange, baseMs, baseCritRate, baseCritDmg, commandStorage);
+            adventurerController.Init(adventurerName, maxHp, hp, baseAtk, attackRange, seekRange,baseMs, baseCritRate,
+                baseCritDmg, commandStorage);
+            adventurerController.damagePopUp = damagePopUp;
             commandStorage.Init(adventurerData.commands);
             healthBar.Init(adventurerController.GetHpContainer(), slider, color);
             damagePopUp.Init(damagePopUpPool);
@@ -51,6 +54,7 @@ namespace _Game.Scripts.Infrastructure
             var hp = enemyData.hp;
             var baseAtk = enemyData.baseAtk;
             var attackRange = enemyData.attackRange;
+            var seekRange = enemyData.seekRange;
             var baseMs = enemyData.baseMS;
             var baseCritRate = enemyData.baseCritRate;
             var baseCritDmg = enemyData.baseCritDmg;
@@ -64,15 +68,16 @@ namespace _Game.Scripts.Infrastructure
             */
 
             var slider = enemyGo.GetComponentInChildren<Slider>();
-            
-            var healthBar = enemyGo.AddComponent<EnemyHealthBar>();
-            var entityDamagePopUp = enemyGo.AddComponent<EntityDamagePopUp>();
+
+            var healthBar = enemyGo.AddComponent<EntityHealthBar>();
+            var damagePopUp = enemyGo.AddComponent<EntityDamagePopUp>();
             var enemyController = enemyGo.AddComponent<EnemyController>();
 
             healthBar.Init(enemyController.GetHpContainer(), slider, color);
-            entityDamagePopUp.Init(damagePopUpPool);
-            enemyController.Init(adventurerName, maxHp, hp, baseAtk, attackRange, baseMs, baseCritRate, baseCritDmg);
-
+            damagePopUp.Init(damagePopUpPool);
+            enemyController.Init(adventurerName, maxHp, hp, baseAtk, attackRange, seekRange,baseMs, baseCritRate, baseCritDmg);
+            enemyController.damagePopUp = damagePopUp;
+            
             return enemyController;
         }
     }

@@ -3,6 +3,7 @@ using _Game.Scripts.CommandsSystem.Failure;
 using _Game.Scripts.CommandsSystem.Model;
 using _Game.Scripts.CommandsSystem.View;
 using _Game.Scripts.Infrastructure;
+using _Game.Scripts.Infrastructure.Entity;
 using _Game.Scripts.Team;
 using TMPro;
 using UnityEngine;

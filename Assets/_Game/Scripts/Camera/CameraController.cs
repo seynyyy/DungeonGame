@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using _Game.Scripts.CommandsSystem.Controller;
 using _Game.Scripts.Infrastructure;
+using _Game.Scripts.Infrastructure.Entity;
 using _Game.Scripts.Team;
 using UnityEngine;
 using UnityEngine.EventSystems;

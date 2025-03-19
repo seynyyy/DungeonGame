@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Game.Scripts.Infrastructure
+namespace _Game.Scripts.Infrastructure.Entity
 {
     public class EntityHealthBar : MonoBehaviour
     {
